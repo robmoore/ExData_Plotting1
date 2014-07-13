@@ -4,9 +4,11 @@ source("shared.R")
 # x axis: Global Active Power (kilowatts)
 # y axis: Frequency
 # Note: Red bars
-savePlotAsPng("plot1.png", function() {
+createPlot1 <- function() {
   hist(data$Global_active_power, 
-       main="Global Active Power", 
-       xlab = "Global Active Power (kilowatts)", 
+       main = "Global Active Power", 
+       xlab = gapTitle, 
        col = c("red"))
-})
+}
+
+savePlotAsPng("plot1.png", createPlot1)
