@@ -36,3 +36,5 @@ data <- loadData()
 # from just those dates rather than reading in the entire dataset and subsetting to those dates.
 data <- data[data$Date %in% as.Date(c('2007-02-01', '2007-02-02')),]
 
+# Combination of date and time for series
+dateTime <- strptime(paste(data$Date, data$Time), format = "%Y-%m-%d %T")
