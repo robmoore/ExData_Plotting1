@@ -3,7 +3,14 @@ maybeDownload.file <- function(dataFileUrl, dataFile) {
     download.file(url=dataFileUrl, destfile=dataFile, method="curl") 
   }
 }
-#Test
+
+savePlotAsPng <- function(filename, plotFunc) {
+  png(filename)
+
+  plotFunc()
+  
+  dev.off()
+}
 
 # Convert using day/month/year format
 setAs("character","dmyDate", function(from) as.Date(from, format="%d/%m/%Y") )
@@ -16,7 +23,11 @@ loadData <- function() {
   maybeDownload.file(dataFileUrl, dataFile)
   
   # Note that in this dataset missing values are coded as ?.
-  read.table(unz(dataFile, "household_power_consumption.txt"), sep = ";", header = TRUE, na.strings = "?", colClasses = c(Date = "dmyDate", "factor", rep("numeric", 7)))
+  read.table(unz(dataFile, "household_power_consumption.txt"), 
+             sep = ";", 
+             header = TRUE, 
+             na.strings = "?", 
+             colClasses = c(Date = "dmyDate", "factor", rep("numeric", 7)))
 }
 
 data <- loadData()
